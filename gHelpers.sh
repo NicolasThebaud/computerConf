@@ -1,12 +1,12 @@
 #to be implemented in .bashrc
 
 alias g_st='clear && git status'
-alias g_ck='git checkout $1'
+alias g_ck='git checkout'
+alias g_pl='git pull'
 
 # TODO:
 #    - implement a man
 #    - implement '-l | --list' option to list files before chosing 
-#    - fix 'staged+unstaged' scenario (MM)
 g_add() {
   local filename=`git__getnthname $1`
   if [[ ! -z "$filename" ]]; then
@@ -29,7 +29,7 @@ g_diff() {
 
 # TODO IDEM
 g_reset() {
-  local filename=`git status --porcelain | sed '/^ M\|??/d' | sed -n $1p | sed 's/M  //i'`
+  local filename=`git status --porcelain | sed '/^ M\|??/d' | sed -n $1p | sed 's/M. //i'`
   if [[ ! -z "$filename" ]]; then
     git reset $filename
   else
@@ -44,7 +44,7 @@ git__porcelain() {
 }
 
 git__getnthname() {
-  git status --porcelain | sed '/^M \|??/d' | sed -n $1p | sed 's/ M //i'
+  git status --porcelain | sed '/^M \|??/d' | sed -n $1p | sed 's/^.\{2\} //i'
 }
 
 git__showsoftstatus() {
@@ -52,7 +52,7 @@ git__showsoftstatus() {
   read -r -p "Show status ? [y/n] " response
   case "$response" in ([yY][eE][sS]|[yY])
     echo ''
-    echo -e "\033[0;31m$(git status --porcelain | sed '/^M \|??/d' | sed 's/[M ]\+/modified\: /i') \033[0m"
+    echo -e "\033[0;31m$(git status --porcelain | sed '/^M /d')\033[0m"
     echo ''
     ;;
   *)
