@@ -84,3 +84,32 @@ git__letters() {
   ?           ?    untracked
   -------------------------------------------------'
 }
+
+g_man() {
+  echo -e '
+> g_ck
+    equivalent to "git checkout" - supports -b and "-" parameter. provides auto-completion
+
+> g_add <n>
+    adds the nth file to the index, or all if not specified
+	(n respects "git status" order; ignoring indexed and untracked files)
+
+> g_diff <n>
+    show diff of nth file, or all if not specified
+	(n respects "git status" order; ignoring indexed files)
+
+> g_res <n>
+    reset nth file, or all if not specified
+	(n respects "git status" order)
+
+> gg_shortstatus
+    display short version of git status
+
+> gg_getnthname <n>
+    diplay name of nth file
+	(n respects "git status" order)
+
+> gg_letters
+    display help for short status letters
+'
+}
