@@ -5,25 +5,47 @@ alias g_ck='git checkout'
 alias g_pl='git pull'
 
 # TODO:
-#    - implement a man
-#    - implement '-l | --list' option to list files before chosing 
+#    - implement a man (WIP)
+#    - implement '-l | --list' option to list files before chosing (WIP)
+#    - factorize methods ? (add & diff are almost the same)
 g_add() {
-  local filename=`git__getnthname $1`
+  if [[ $1 = '-l' || $1 = '--list' ]]; then
+    gg_shortstatus
+    read -r -p "n ? " n
+    local filename=`gg_getnthname $n`
+  elif [[ $1 = '-h' || $1 = '--help' ]]; then
+    echo 'TODO man single command'
+    return
+  else
+    local filename=`gg_getnthname $1`
+  fi
+
   if [[ ! -z "$filename" ]]; then
     git add $filename
     echo "added file: $filename"
   else
-    git__showsoftstatus
+    gg_showsoftstatus
   fi
 }
 
 # TODO IDEM
 g_diff() {
-  local filename=`git__getnthname $1`
+  if [[ $1 = '-l' || $1 = '--list' ]]; then
+    gg_shortstatus
+    read -r -p "n ? " n
+    local filename=`gg_getnthname $n`
+  elif [[ $1 = '-h' || $1 = '--help' ]]; then
+    echo 'TODO man single command'
+    return
+  else
+    local filename=`gg_getnthname $1`
+  fi
+
   if [[ ! -z "$filename" ]]; then
     git diff $filename
+    echo "added file: $filename"
   else
-    git__showsoftstatus
+    gg_showsoftstatus
   fi
 }
 
