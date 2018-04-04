@@ -3,6 +3,12 @@
 alias g_st='clear && git status'
 alias g_ck='git checkout'
 alias g_pl='git pull'
+alias g_pop='git stash pop'
+alias g_l='git log -1'
+alias g_ll='git log -2'
+alias g_mend='git commit --amend'
+# pretty print (one-line) n last commits
+alias gg_l='git log --pretty=oneline --abbrev-commit -n $1'
 
 # TODO:
 #    - implement a man (WIP)
@@ -107,6 +113,7 @@ git__letters() {
   -------------------------------------------------'
 }
 
+# missing stuff, needs update
 g_man() {
   echo -e '
 > g_ck
