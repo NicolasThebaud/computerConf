@@ -1,0 +1,9 @@
+{
+    "documentation": "https://github.com/adobe/brackets/wiki/User-Key-Bindings",
+    "overrides": {
+        "Ctrl-/": null,
+        "Ctrl-q": "edit.lineComment",
+        "Ctrl-d": "edit.deletelines",
+        "Ctrl-Shift-d": "edit.duplicate"
+    }
+}
